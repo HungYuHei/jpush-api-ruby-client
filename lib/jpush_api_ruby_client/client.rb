@@ -217,7 +217,35 @@ module JPushApiRubyClient
       post_body[:override_msg_id] = msg[:override_msg_id] if msg.has_key?(:override_msg_id)
 
       post_body.merge!(options)
-      post_jpush_api(api_url, post_body)
+
+
+      limit = case receiver[:receiver_type]
+      when ReceiverType::TAG
+        10
+      when ReceiverType::ALIAS
+        1000
+      else
+        false
+      end
+
+      if limit && receiver[:receiver_value].is_a?(Array)
+        receiver[:receiver_value].each_slice(limit) do |arr|
+          _receiver_value = arr.join(',')
+          _verification_code = build_verification(send_no,
+                                                  receiver[:receiver_type],
+                                                  _receiver_value || '',
+                                                  master_secret)
+
+          new_post_body = post_body.merge(
+            :receiver_value => _receiver_value,
+            :verification_code => _verification_code
+          )
+
+          post_jpush_api(api_url, new_post_body)
+        end
+      else
+        post_jpush_api(api_url, post_body)
+      end
     end
 
     # POST JPush API

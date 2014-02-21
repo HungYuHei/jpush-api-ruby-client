@@ -50,9 +50,11 @@ class ClientExample
 =end
 
   msg_content = '根据 tag 发送通知'
+  # 如果是多个tag，可以直接传入数组
   puts send_result = jpush_client.send_notification_with_tag(send_no, '这里输入你的tag', msg_title, msg_content)
 
   msg_content = '根据 alias 发送通知'
+  # 如果是多个alias，可以直接传入数组
   puts send_result = jpush_client.send_notification_with_alias(send_no, '这里输入你的alias', msg_title, msg_content)
 
   msg_content = '根据 imei 发送通知'
@@ -71,9 +73,11 @@ class ClientExample
 =end
 
   msg_content = '根据 tag 发送自定义消息'
+  # 如果是多个tag，可以直接传入数组
   puts send_result = jpush_client.send_message_with_alias(send_no, '这里输入你的tag', msg_title, msg_content)
 
   msg_content = '根据 alias 发送自定义消息'
+  # 如果是多个tag，可以直接传入数组
   puts send_result = jpush_client.send_message_with_tag(send_no, '这里输入你的alias', msg_title, msg_content)
 
   msg_content = '根据 imei 发送自定义消息'
