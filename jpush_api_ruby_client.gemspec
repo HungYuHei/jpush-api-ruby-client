@@ -20,6 +20,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "rspec", "~> 2.6"
   spec.add_runtime_dependency "rest-client","~> 1.6.7"
-  spec.add_runtime_dependency "json", "~> 1.7.7"
-
+  spec.add_runtime_dependency "json", "~> 1.8.1"
 end
